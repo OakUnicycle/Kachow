@@ -1,9 +1,9 @@
 :root {
-    --primary-colour: #d13333;
-    --secondary-colour: #f6c373;
-    --secondary-colour_darkened: #b08540;
-    --light_grey: rgb(40, 40, 40);
-    --dark_grey: rgb(20, 20, 20);
+    --header_colour: #d13333;
+    --text_colour: rgb(240, 240, 240);
+    --sidebar_colour: rgb(40, 40, 40);
+    --background_colour: rgb(20, 20, 20);
+    --textbox_colour: rgb(40, 40, 40);
 
     --header-height: 80px;
 
@@ -13,7 +13,7 @@
     
 
     
-    --art_title_margin_top: 20px;
+    --art_title_margin_top: 0px;
     --art_title_font_size: 40px;
     --art_title_height: 60px;
     
@@ -32,26 +32,22 @@
 }
 
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p, span {
     margin: 0;
     display: block;
-    font-family: "Arial", sans-serif;
-}
-p {
-    display: block;
-    margin: 0;
     font-family: "Inter", sans-serif;
+    color: var(--text_colour);
 }
 
 body {
-    background-color: var(--dark_grey);
+    background-color: var(--background_colour);
 }
 
 
 .header {
     position: fixed;
     display: flex;
-    background-color: var(--primary-colour);
+    background-color: var(--header_colour);
     width: 100%;
     height: var(--header-height);
     align-items: center;
@@ -117,7 +113,7 @@ body {
     width: calc(100% - 10px);
     height: calc(100% - 10px);
     border-radius: 15px;
-    background-color: var(--light_grey);
+    background-color: var(--sidebar_colour);
     
 }
 
@@ -131,7 +127,7 @@ body {
     width: 100%;
     margin-top: 10px;
     font-size: 20px;
-    padding: 0 10px;
+    padding: 10px 10px;
     box-sizing: border-box;
     overflow-wrap: break-word;
 }
@@ -165,17 +161,19 @@ body {
 
 .divider {
     justify-self: center;
-    width: 80%;
+    width: 85%;
     height: 3px;
-    background-color: var(--dark_grey);
+    margin-top: 20px;
+    background-color: var(--background_colour);
 }
 
 
 .slider_wrapper {
     display: flex;
     width: 90%;
-    flex-direction: column;
     align-items: stretch;
+    flex-direction: column;
+    
     
     gap: 5px;
 }
@@ -222,29 +220,25 @@ body {
 }
 
 
-
-
-
-
+ 
 
 .output_box {
     width: 100%;
     height: 100%;
-    top:100px;
+    
     padding-top: 1px;
     overflow-y: auto;
-    overflow-x: hidden;
+    margin: 10px;
 }
 
 
-
-
 .article {
-    margin-left: 20px;
     width: calc(100% - var(--output_box_margin) * 2);
     overflow-wrap: anywhere;
     white-space: normal;
-    color: white;
+
+    background-color: var(--textbox_colour);
+    border: 8px solid var(--textbox_colour);
 }
 .title {
     margin-top: var(--art_title_margin_top);
