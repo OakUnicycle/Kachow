@@ -13,7 +13,7 @@
     <div class="header">
         <div class="header_left">
             <h1 class="header_title">  
-                Title
+                Kachow
             </h1>
         </div>
         <div class="header_right">
@@ -24,45 +24,53 @@
 
     <div class="split_screen">
         <div class="left_side">
-
-            <div class="input_box">
-                <h2 class="text_box url_text">
-                    Input a URL of an Article
-                </h2>
-                <form action="upload" method="post" enctype="multipart/form-data" class="url_form_input">
-                    <input type="text" id="url" name="url" placeholder="enter website URL"><br>
-                </form>
-            </div>
-
-            <div class= "judging_box source">
-                <img src="" alt="Source Icon">
-                <div class="judging_text_box source_text_box">
-                    <p>Source Text</p>
+            <div class="side_bar">
+                
+                <div class="input_box">
+                    <h2 class="text_box url_text">
+                        Input a URL of an Article
+                    </h2>
+                    <form action="upload" method="post" enctype="multipart/form-data" class="url_form_input">
+                        <input type="text" id="url" name="url" placeholder="enter website URL"><br>
+                    </form>
                 </div>
-            </div>
 
-            <div class="judging_box bias">
-                <div class="judging_text_box">
-                    <p>Likelihood of Bias</p>
-                </div>
-                <div class="slider_wrapper">
-                    <input type="range" min="0" max="100" value="50" id="slider">
-                    <div class="slider_labels">
-                        <span>0%</span>
-                        <span>100%</span>
+                <div class="divider"></div>
+
+                <div class= "judging_box source">
+                    <img src="" alt="Source Icon">
+                    <div class="judging_text_box source_text_box">
+                        <p>Source Text</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="judging_box political">
-                <div class="judging_text_box">
-                    <p>Politically Leaning</p>
+                <div class="divider"></div>
+
+                <div class="judging_box bias">
+                    <div class="judging_text_box">
+                        <p>Likelihood of Bias</p>
+                    </div>
+                    <div class="slider_wrapper">
+                        <input type="range" min="0" max="100" value={{bias_value}} id="slider" disabled>
+                        <div class="slider_labels">
+                            <span>0%</span>
+                            <span>100%</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="slider_wrapper political">
-                    <input type="range" min="0" max="100" value="50" id="slider" enabled>
-                    <div class="slider_labels">
-                        <span>Left</span>
-                        <span>Right</span>
+
+                <div class="divider"></div>
+
+                <div class="judging_box political">
+                    <div class="judging_text_box">
+                        <p>Politically Leaning</p>
+                    </div>
+                    <div class="slider_wrapper political">
+                        <input type="range" min="0" max="100" value={{political_value}} id="slider" disabled>
+                        <div class="slider_labels">
+                            <span>Left</span>
+                            <span>Right</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,15 +81,15 @@
             <article class="output_box">
 
                 <h3 class="article text_box title">
-                    title (*******************************)
+                    This is the title, please enjoy it
                 </h3>
 
                 <h4 class="article text_box author">
-                    author (*******************************)
+                    The author will go here
                 </h4>
 
                 <p class="article text_box contents">
-                    contents (**********************************************************************************************************************************************************************************************************************************************************************************)
+                    text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
                 </p>
             </article>
         </div>

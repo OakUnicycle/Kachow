@@ -1,5 +1,9 @@
 :root {
-    --kachow-red: #C33332;
+    --primary-colour: #d13333;
+    --secondary-colour: #f6c373;
+    --secondary-colour_darkened: #b08540;
+    --light_grey: rgb(40, 40, 40);
+    --dark_grey: rgb(20, 20, 20);
 
     --header-height: 80px;
 
@@ -10,11 +14,14 @@
 
     
     --art_title_margin_top: 20px;
+    --art_title_font_size: 40px;
     --art_title_height: 60px;
     
+    --art_author_font_size: 30px;
     --art_author_margin_top: 20px;
     --art_author_height: 40px;
     
+    --art_contents_font_size: 25px;
     --art_contents_margin_top: 30px;
     --art_contents_margin_bottom: 20px;
     --art_contents_height: calc(100% - 
@@ -36,11 +43,15 @@ p {
     font-family: "Inter", sans-serif;
 }
 
+body {
+    background-color: var(--dark_grey);
+}
+
 
 .header {
     position: fixed;
     display: flex;
-    background-color: var(--kachow-red);
+    background-color: var(--primary-colour);
     width: 100%;
     height: var(--header-height);
     align-items: center;
@@ -86,29 +97,43 @@ p {
     left: 0;
     width: 100%;
     height: calc(100% - var(--header-height));
-    background-color: #cc5ea4;
 }
 
 
 
 
 .left_side {
-    width: var(--left_side_width);    
+    display: flex;
+    width: var(--left_side_width);
+    min-width: 200px;    
     max-width: 300px; 
-    background-color: #5ecc79;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.side_bar {
+    position: relative;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    border-radius: 15px;
+    background-color: var(--light_grey);
+    
 }
 
 .input_box {
     padding:1px;
     width: 100%;
     height: 100px;
-    background-color: #4a1864;
 }
 
 .url_text {
     width: 100%;
     margin-top: 10px;
-    font-size: 20px
+    font-size: 20px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
 }
 
 .url_form_input {
@@ -126,16 +151,23 @@ p {
     display:flex;
     padding-top: 10px;
     width: 100%;
-    height: 80px;
+    height: 60px;
     margin-top: 20px;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #b9f66d;  
 }
 .judging_text_box {
     font-size: 20px;
     font-weight: bold;
+}
+
+
+.divider {
+    justify-self: center;
+    width: 80%;
+    height: 3px;
+    background-color: var(--dark_grey);
 }
 
 
@@ -164,7 +196,7 @@ p {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: white;
+    background: rgb(255, 255, 255);
 }
 
 .slider_labels {
@@ -185,9 +217,8 @@ p {
 .right_side {
     width: calc(100% - var(--left_side_width));
     min-width: calc(100% - 300px);
+    max-width: calc(100% - 200px);
     flex: 1;
-    background-color: #469a94;
-    
 }
 
 
@@ -200,7 +231,6 @@ p {
     width: 100%;
     height: 100%;
     top:100px;
-    background-color: #cdb44e;
     padding-top: 1px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -208,29 +238,25 @@ p {
 
 
 
-.text_box {
-    background-color: #1a608f;
-}
 
 .article {
     margin-left: 20px;
     width: calc(100% - var(--output_box_margin) * 2);
+    overflow-wrap: anywhere;
+    white-space: normal;
+    color: white;
 }
 .title {
     margin-top: var(--art_title_margin_top);
-    font-size: var(--art_title_height);
-    white-space: nowrap;
+    font-size: var(--art_title_font_size);
+    text-decoration: underline;
 }
 .author {
     margin-top: var(--art_author_margin_top);
-    font-size: var(--art_author_height);
-    white-space: nowrap;
+    font-size: var(--art_author_font_size);
 }   
 .contents {
     margin-top: var(--art_contents_margin_top);
+    font-size: var(--art_contents_font_size);
     margin-bottom: var(--art_contents_margin_bottom);
-    font-size: 40px;
-    overflow-wrap: anywhere;
-    white-space: normal;
-    
 }
