@@ -13,8 +13,6 @@ def google_search(query, num_results=10):
     
     Args:
         query (str): The search query.
-        api_key (str): Your Google API Key.
-        cse_id (str): Your Custom Search Engine ID.
         num_results (int): Number of results to return (max 10 per call).
 
     Returns:
