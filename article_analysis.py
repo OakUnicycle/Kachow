@@ -10,6 +10,8 @@ def analyse_article(url):
 
     data['title'] = article.title
     data['maintext'] = article.maintext
+    data['authors'] = article.authors
+    data['source_domain'] = article.source_domain
 
     related_articles = ai.get_related_articles_and_summary(article.maintext)
 
