@@ -12,15 +12,26 @@
     --art_title_margin_top: 20px;
     --art_title_height: 60px;
     
-    --art_author_margin_top: 15px;
+    --art_author_margin_top: 20px;
     --art_author_height: 40px;
     
     --art_contents_margin_top: 30px;
+    --art_contents_margin_bottom: 20px;
     --art_contents_height: calc(100% - 
     var(--art_title_height) - var(--art_title_margin_top) - 
     var(--art_author_height) - var(--art_author_margin_top) - 
-    var(--art_contents_margin_top) - 20px);
+    var(--art_contents_margin_top) - var(--art_contents_margin_bottom));
     
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    display: block;
+}
+p {
+    display: block;
+    margin: 0;
 }
 
 
@@ -53,8 +64,16 @@
 
 .header_title {
     color: black;
-    font-size: 64;
+    font-size: 64px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -69,14 +88,72 @@
 }
 
 
+
+
 .left_side {
-    width: var(--left_side_width);            
+    width: var(--left_side_width);    
+    max-width: 300px; 
     background-color: #5ecc79;
 }
+
+.input_box {
+    padding:1px;
+    width: 100%;
+    height: 100px;
+    background-color: #4a1864;
+}
+
+.url_text {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 20px
+}
+
+.url_form_input {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.url_form_input input[type="text"] {
+    width: 90%;
+}
+
+
+.judging_box {
+    padding-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+.source_box {
+    background-color: #e3f124;
+    height: 130px;
+}
+.source_text_box {
+    width: 100%;
+}
+
+.bias_box {
+    background-color: #f95419;
+    height: 130px;
+}
+
+.political_box {
+    background-color: #ff2727;
+    height: 130px;
+}
+
+.slider {
+    width: 100%;
+}
+
+
+
 
 
 .right_side {
     width: calc(100% - var(--left_side_width));
+    min-width: calc(100% - 300px);
     flex: 1;
     background-color: #469a94;
     
@@ -84,17 +161,7 @@
 
 
 
-.input_box {
-    width: 100%;
-    height: 100px;
-    background-color: #4a1864;
-    align-content: center;
-}
 
-.url_input input[type="text"] {
-    width: 90%;
-
-}
 
 
 
@@ -104,6 +171,8 @@
     top:100px;
     background-color: #cdb44e;
     padding-top: 1px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 
@@ -128,7 +197,9 @@
 }   
 .contents {
     margin-top: var(--art_contents_margin_top);
+    margin-bottom: var(--art_contents_margin_bottom);
     font-size: 40px;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     white-space: normal;
+    
 }

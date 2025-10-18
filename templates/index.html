@@ -12,9 +12,9 @@
 <body>
     <div class="header">
         <div class="header_left">
-            <div class="header_title">  
+            <h1 class="header_title">  
                 Title
-            </div>
+            </h1>
         </div>
         <div class="header_right">
 
@@ -24,38 +24,53 @@
 
     <div class="split_screen">
         <div class="left_side">
+
             <div class="input_box">
-                <form action="upload" method="post" enctype="multipart/form-data" class="url_input">
+                <h2 class="text_box url_text">
+                    Input a URL of an Article
+                </h2>
+                <form action="upload" method="post" enctype="multipart/form-data" class="url_form_input">
                     <input type="text" id="url" name="url" placeholder="enter website URL"><br>
                 </form>
             </div>
-            <div class="text_box source">
-
+            <div class="source_box judging_box">
+                <div class="source_icon">
+                    bruh what
+                </div>
+                <div class="source_text_box">
+                    bruh how
+                </div>
             </div>
-            <div class="text_box bias">
+            <div class="bias_box judging_box">
+                <p>Bias Rating</p>
+                <div class="slider">
 
+                </div>
             </div>
-            <div class="text_box political">
+            <div class="political_box judging_box">
+                <p>Politically Leaning</p>
+                <div class="slider">
 
+                </div>
             </div>
         </div>
 
         <div class="right_side">
             
-            <div class="output_box">
+            <article class="output_box">
 
-                <div class="article text_box title">
+                <h3 class="article text_box title">
                     title (*******************************)
-                </div>
+                </h3>
 
-                <div class="article text_box author">
+                <h4 class="article text_box author">
                     author (*******************************)
-                </div>
+                </h4>
 
-                <div class="article text_box contents">
+                <p class="article text_box contents">
                     contents (**********************************************************************************************************************************************************************************************************************************************************************************)
-                </div>
-            </div>
+                </p>
+            </article>
         </div>
     </div>
 </body>
