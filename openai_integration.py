@@ -2,6 +2,7 @@ import os
 import json
 from openai import OpenAI
 from dotenv import load_dotenv
+import google_search as gs
 
 load_dotenv()  # loads .env file
 API_KEY = os.getenv("OPENAI_API_KEY")
@@ -95,7 +96,19 @@ def verify_related(summary, results):
         # Parse the JSON response
         analysis = json.loads(response.choices[0].message.content)
 
-        print(response.choices[0].message.content)
+        return [results[int(i['index'])] for i in analysis['filtered_results']]
 
     except Exception as e:
         print(f"An error occurred: {e}")
+
+
+
+def get_related_articles_and_summary(content):
+    analysis = generate_analysis(content)
+    search_results = gs.google_search(analysis['search_queries'][0])
+    verified = verify_related(analysis['main_topic'], search_results)
+
+    return {
+        "summary": analysis['main_topic'],
+        "results": verified
+    }

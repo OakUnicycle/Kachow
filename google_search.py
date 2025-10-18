@@ -32,7 +32,8 @@ def google_search(query, num_results=10):
         ).execute()
         
         # Return the list of 'items' (search results)
-        return res.get('items', [])
+        result = [{'title': i['title'], 'snippet': i['snippet'], 'link': i['link']} for i in res.get('items', [])]
+        return result
 
     except Exception as e:
         print(f"An error occurred: {e}")
