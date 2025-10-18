@@ -1,24 +1,26 @@
-from flask import Flask, request
-
+from flask import Flask, render_template, request
+from bias_checker import bias_checker as bc
 app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    # A simple form to submit a URL
-    return """
-    <form action="/submit-url" method="post">
-      <label for="url">Enter URL:</label>
-      <input type="text" id="url" name="url_input" size="50">
-      <button type="submit">Submit</button>
-    </form>
-    """
+@app.route("/", methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
 
-@app.route("/submit-url", methods=["POST"])
-def submit_url():
-    url = request.form.get("url_input")
-    if url:
-        return f"The submitted URL is: {url}"
-    return "No URL submitted."
+
+@app.route("/upload", methods = ['POST']) # should be changed to name of website used in html
+def upload():
+    # if 'text' not in request.files:
+    #     return render_template('404.html')
+    
+    url = request.form.get("url") # gets the inputted url
+    bc(url) # bias checking function, takes in a website url, and returns a 'bias value'
+    
+    
+    return render_template('index.html')
+
+
+
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
