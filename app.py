@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 import sqlite3
 import validators
 from bias_checker import bias_checker
+from article_analysis import analyse_article
 
 app = Flask(__name__)
 
