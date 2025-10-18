@@ -1,7 +1,26 @@
 :root {
     --kachow-red: #C33332;
 
-    --header-height: 140px;
+    --header-height: 80px;
+
+    --left_side_width: 30%;
+
+    --output_box_margin: 20px;
+    
+
+    
+    --art_title_margin_top: 20px;
+    --art_title_height: 60px;
+    
+    --art_author_margin_top: 15px;
+    --art_author_height: 40px;
+    
+    --art_contents_margin_top: 30px;
+    --art_contents_height: calc(100% - 
+    var(--art_title_height) - var(--art_title_margin_top) - 
+    var(--art_author_height) - var(--art_author_margin_top) - 
+    var(--art_contents_margin_top) - 20px);
+    
 }
 
 
@@ -32,7 +51,7 @@
     justify-content: center;
 }
 
-.title {
+.header_title {
     color: black;
     font-size: 64;
 }
@@ -51,16 +70,16 @@
 
 
 .left_side {
-  width: 400px;            
-  background-color: #5ecc79;
-  overflow-y: auto;
+    width: var(--left_side_width);            
+    background-color: #5ecc79;
 }
 
 
 .right_side {
-  flex: 1;
-  background-color: #469a94;
-  overflow-y: auto;
+    width: calc(100% - var(--left_side_width));
+    flex: 1;
+    background-color: #469a94;
+    
 }
 
 
@@ -69,20 +88,47 @@
     width: 100%;
     height: 100px;
     background-color: #4a1864;
-    
+    align-content: center;
 }
 
 .url_input input[type="text"] {
-    width: 300px;
-    margin-top: 25px;
-    margin-left: 25px;
+    width: 90%;
+
 }
 
 
 
-.result_box {
+.output_box {
     width: 100%;
-    height: calc(100% - 100px);
+    height: 100%;
     top:100px;
     background-color: #cdb44e;
+    padding-top: 1px;
+}
+
+
+
+.text_box {
+    background-color: #1a608f;
+}
+
+.article {
+    margin-left: 20px;
+    width: calc(100% - var(--output_box_margin) * 2);
+}
+.title {
+    margin-top: var(--art_title_margin_top);
+    font-size: var(--art_title_height);
+    white-space: nowrap;
+}
+.author {
+    margin-top: var(--art_author_margin_top);
+    font-size: var(--art_author_height);
+    white-space: nowrap;
+}   
+.contents {
+    margin-top: var(--art_contents_margin_top);
+    font-size: 40px;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
