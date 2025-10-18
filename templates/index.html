@@ -33,22 +33,37 @@
                     <input type="text" id="url" name="url" placeholder="enter website URL"><br>
                 </form>
             </div>
-            <div class="source_box judging_box">
+
+            <div class= "judging_box source">
                 <img src="" alt="Source Icon">
-                <div class source_text-box>
+                <div class="judging_text_box source_text_box">
                     <p>Source Text</p>
                 </div>
             </div>
-            <div class="bias_box judging_box">
-                <p>Bias Rating</p>
-                <div class="slider">
 
+            <div class="judging_box bias">
+                <div class="judging_text_box">
+                    <p>Likelihood of Bias</p>
+                </div>
+                <div class="slider_wrapper">
+                    <input type="range" min="0" max="100" value="50" id="slider">
+                    <div class="slider_labels">
+                        <span>0%</span>
+                        <span>100%</span>
+                    </div>
                 </div>
             </div>
-            <div class="political_box judging_box">
-                <p>Politically Leaning</p>
-                <div class="slider">
 
+            <div class="judging_box political">
+                <div class="judging_text_box">
+                    <p>Politically Leaning</p>
+                </div>
+                <div class="slider_wrapper political">
+                    <input type="range" min="0" max="100" value="50" id="slider" enabled>
+                    <div class="slider_labels">
+                        <span>Left</span>
+                        <span>Right</span>
+                    </div>
                 </div>
             </div>
         </div>
