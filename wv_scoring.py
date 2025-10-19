@@ -68,7 +68,12 @@ class Bias_Score():
       article_words = self.preprocess_text(raw_text)
       if not article_words:
         return {'error': 'No significant words remained after preprocessing.'}
-        
+      
+      if dictionary is not None:
+        extra_scores = {}
+        for key in dictionary:
+          extra_scores[key] = self.calculate_targeted_bias(article_words, [key])
+                
       scores = {}
 
       scores['liberal_affinity'] = self.calculate_targeted_bias(article_words, self.LIBERAL_SEEDS)
@@ -78,23 +83,21 @@ class Bias_Score():
             
       scores['political_bias_score'] = scores['liberal_affinity'] - scores['conservative_affinity']
       scores['sentiment_score'] = scores['positive_sentiment'] - scores['negative_sentiment']
-            
+      if dictionary is not None:
+        scores.update(extra_scores) 
       return scores
     except ValueError as e:
           return {'error': str(e)}
     except Exception as e:
           return {'error': f"An unexpected error occurred during scoring: {e}"}
-
+    
 def main(url, model, extra_arguments=None):
-    extra_arguments_comparisons = {}
-    if extra_arguments is not None:
-        for argument in extra_arguments:
-            extra_arguments_comparisons[argument] = 0
-        extra_comparisons = instance.get_bias_scores()
-
     instance = Bias_Score(url, model)
-    baseline_dict = instance.get_bias_scores()
-    return baseline_dict, extra_comparisons
+    extra_args_dict = None
+    if extra_arguments is not None:
+        extra_args_dict = {argument: 0 for argument in extra_arguments}  
+    all_scores = instance.get_bias_scores(extra_args_dict)
+    return all_scores
 
 if __name__ == "__main__":
     filename = './word_rating_predictor.joblib'
