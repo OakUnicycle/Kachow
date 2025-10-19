@@ -3,3 +3,6 @@ python-dotenv
 openai
 google-api-python-client
 news-please
+joblib
+nltk
+gensim
