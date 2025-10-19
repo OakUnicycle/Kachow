@@ -16,3 +16,4 @@ __pycache__/
 website_sentiment.db  # <--- IMPORTANT: This is the database file.
 *.log
 
+test2.py
