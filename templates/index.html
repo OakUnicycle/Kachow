@@ -72,7 +72,10 @@
                     </h2>
                     <form method="post" id="main_form" class="form_input">
                         <input type="text" id="url" name="url" placeholder="enter website URL"><br>
-                    </form>
+                                                <label for="comparison_word">Compare with Word:</label>
+                        <input type="text" name="comparison_word" placeholder="e.g., happy, economy, war" value="{{ comparison_word if comparison_word else '' }}">
+                        <button type="submit">Re-Analyse</button>
+                    </form>
                 </div>
                 
 

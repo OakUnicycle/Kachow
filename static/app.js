@@ -1,27 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // comparison_word, scores, and related_articles are globally available here
 
-    // Check if we have scores data. If we do, it means the page has been loaded
-    // with data from the backend, so we should populate the sliders and cards.
     if (scores && Object.keys(scores).length > 0) {
-        const politicalBias = (parseFloat(scores.political_bias_score) + 1) * 50;
-        const sentiment = (parseFloat(scores.sentiment_score) + 1) * 50;
-        const summedAffinities = Math.abs(parseFloat(scores.liberal_affinity)) + Math.abs(parseFloat(scores.conservative_affinity));
-        const normalizedBias = summedAffinities / 2;
+        
+        // --- BASE SLIDER CALCULATIONS ---
+        // Scale [-2.0, 2.0] to [0, 100]. Your scores are bounded by [-2, 2].
+        const politicalBias = (parseFloat(scores.political_bias_score) + 2) * 25; 
+        const sentiment = (parseFloat(scores.sentiment_score) + 2) * 25;         
+        
+        const liberalAffinity = parseFloat(scores.liberal_affinity);
+        const conservativeAffinity = parseFloat(scores.conservative_affinity);
+        const summedAffinities = Math.abs(liberalAffinity) + Math.abs(conservativeAffinity);
+        const normalizedBias = summedAffinities / 2; 
         const likelihoodOfBias = normalizedBias * 100;
-
-        populate_sliders([
+        
+        // --- SLIDER ARRAY SETUP ---
+        const sliders = [
             {
                 title: "Political Sway",
-                min: "left",
-                max: "right",
+                min: "Left",
+                max: "Right",
                 value: politicalBias,
                 leftColour: 'red',
                 rightColour: 'blue'
             },
             {
                 title: "Sentiment",
-                min: "negative",
-                max: "positive",
+                min: "Negative",
+                max: "Positive",
                 value: sentiment,
                 leftColour: 'red',
                 rightColour: 'green'
@@ -32,35 +38,40 @@ document.addEventListener("DOMContentLoaded", () => {
                 max: "100%",
                 value: likelihoodOfBias,
             }
-        ]);
+        ];
 
-        if (typeof comparison_word !== 'undefined' && comparison_word) {
+        // 💡 ADD THE COMPARISON WORD SLIDER IF A WORD WAS PROVIDED AND SCORED
+        if (comparison_word) {
             const comparisonScoreKey = comparison_word.toLowerCase();
             const rawScore = scores[comparisonScoreKey];
             
             if (rawScore) {
                 const floatScore = parseFloat(rawScore);
-                const scorePercentage = ((floatScore + 1.0) / 2.0) * 100;
                 
-                // Scale the score to be a percentage for display
-                const displayScore = `${Math.round(scorePercentage)}%`;
+                // Scale affinity score [-1.0, 1.0] to slider value [0, 100]
+                const comparisonSliderValue = ((floatScore + 1.0) / 2.0) * 100; 
                 
-                // Display the card
-                const card = document.getElementById("word_comparison_card");
-                card.style.display = 'block';
-                document.getElementById("comparison_word_title").textContent = `Affinity with "${comparison_word}"`;
-                
-                // The score is an average cosine similarity: -1.0 to 1.0.
-                // Displaying it as a raw affinity or a simple percentage works best.
-                document.getElementById("comparison_word_score").innerHTML = `
-                    **Raw Affinity:** ${floatScore.toFixed(3)} <br> 
-                    **Similarity (%):** ${displayScore}
-                `;
+                sliders.push({
+                    title: `Affinity with "${comparison_word}"`,
+                    min: "Dissimilar (-1.0)",
+                    max: "Similar (+1.0)",
+                    value: comparisonSliderValue,
+                    leftColour: '#ff9900', // Orange
+                    rightColour: '#00ccff' // Light Blue
+                });
             }
         }
 
+        // --- POPULATE SLIDERS ---
+        // This is the function that iterates over the array and creates the HTML using the template
+        populate_sliders(sliders); 
+
         populate_related_articles(related_articles);
     }
+    
+    // ... (Your definitions for populate_sliders and populate_related_articles go here) ...
+    // Note: You may want to ensure these functions are accessible/defined in this script.
+});
 
     function populate_sliders(sliders) {
         const container = document.querySelector('.side_bar');
