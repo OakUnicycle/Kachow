@@ -121,7 +121,7 @@ body {
 .input_box {
     padding:1px;
     width: 100%;
-    height: 100px;
+    height: 80px;
 }
 
 .url_text {
@@ -133,13 +133,13 @@ body {
     overflow-wrap: break-word;
 }
 
-.url_form_input {
+.form_input {
     display: flex;
     width: 100%;
     justify-content: center;
 }
 
-.url_form_input input[type="text"] {
+.form_input input[type="text"] {
     width: 90%;
 }
 
@@ -148,8 +148,8 @@ body {
     display:flex;
     padding-top: 10px;
     width: 100%;
-    height: 60px;
-    margin-top: 20px;
+    height: 40px;
+    margin-top: 10px;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
@@ -163,8 +163,8 @@ body {
 .divider {
     justify-self: center;
     width: 85%;
-    height: 3px;
     margin-top: 20px;
+    height: 3px;
     background-color: var(--background_colour);
 }
 
