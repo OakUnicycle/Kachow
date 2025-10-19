@@ -1,2 +1,3 @@
 # Kachow
-WHACK project
+## WHACK project
+Bias scanner
