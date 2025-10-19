@@ -233,9 +233,10 @@ body {
     width: calc(100% - var(--output_box_margin) * 2);
     overflow-wrap: anywhere;
     white-space: normal;
+    border-radius: 12px;
+    border: 1px solid rgb(60, 60, 60);
 
     background-color: var(--textbox_colour);
-    border: 8px solid var(--textbox_colour);
 }
 .title {
     margin-top: var(--art_title_margin_top);
@@ -318,41 +319,37 @@ body {
 
 #related-articles {
     display: grid;
-    /* Create 1-3 columns depending on screen width */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px; /* Space between cards */
+    gap: 20px;
     
-    /* Padding to match your main article box */
     padding: 0px 10px 20px 10px; 
     box-sizing: border-box;
 }
 
-/* This styles the <a> tag your JS creates */
 .article-card {
-    background-color: var(--textbox_colour); /* Use your existing color */
+    background-color: var(--textbox_colour);
     border-radius: 12px;
     padding: 20px;
-    text-decoration: none; /* Remove underline from the link */
+    text-decoration: none;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    border: 1px solid rgb(60, 60, 60); /* A subtle border */
+    border: 1px solid rgb(60, 60, 60);
 }
 
 .article-card:hover {
-    transform: translateY(-5px); /* Lifts the card up */
+    transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
-/* This styles the <h1> inside the card */
+
 .article-card h1 {
-    font-size: 1.2rem; /* 1.2 * 16px = 19.2px */
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--text_colour);
     margin-bottom: 10px;
 }
 
-/* This styles the <p> inside the card */
+
 .article-card p {
     font-size: 0.9rem; /* 0.9 * 16px = 14.4px */
-    color: rgb(200, 200, 200); /* A slightly lighter text for the snippet */
     line-height: 1.5;
 }

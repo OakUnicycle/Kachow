@@ -37,6 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 rightColour: 'blue'
             },
             {
+                title: "Sentiment",
+                min: "negative",
+                max: "positive",
+                value: 50,
+                leftColour: 'red',
+                rightColour: 'green'
+            },
+            {
                 title: "Likelihood of Bias",
                 min: "0%",
                 max: "100%",
