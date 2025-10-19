@@ -78,7 +78,13 @@ body {
 
 
 
+.toggle-knob {
+  transition: left 0.3s;
+}
 
+body.night .toggle-knob {
+  left: 33px;
+}
 
 
 
