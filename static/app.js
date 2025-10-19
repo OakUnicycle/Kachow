@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    const slider_template = document.getElementById("slider_template");
+    
+
     const intro_container = document.getElementById("intro-container");
     const intro_form = document.getElementById("intro-form");
     const intro_url = document.getElementById("intro-url");
@@ -23,6 +27,23 @@ document.addEventListener("DOMContentLoaded", () => {
             split_screen.style.opacity = "1";
         }, 500);
 
+        populate_sliders([
+            {
+                title: "Political Sway",
+                min: "left",
+                max: "right",
+                value: 50,
+                leftColour: 'red',
+                rightColour: 'blue'
+            },
+            {
+                title: "Likelihood of Bias",
+                min: "0%",
+                max: "100%",
+                value: 50,
+            }
+        ]);
+
         populate_related_articles([
             {
                 title: "New AI Model Challenges Industry Giants",
@@ -46,7 +67,46 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
 
+    function populate_sliders(sliders) {
+        const container = document.querySelector('.side_bar');
+        const template = document.getElementById('slider_template');
 
+        sliders.forEach(slider => {
+            // Clone the template
+            const clone = template.content.cloneNode(true);
+
+            // Populate title
+            const titleElem = clone.querySelector('.slider_title');
+            titleElem.textContent = slider.title;
+
+            // Populate input
+            const inputElem = clone.querySelector('.slider_input');
+            
+            inputElem.value = slider.value;
+            inputElem.disabled = false;
+
+            // Populate min/max labels
+            clone.querySelector('.slider_min').textContent = slider.min;
+            clone.querySelector('.slider_max').textContent = slider.max;
+
+            // Determine colors (default to white)
+            const leftColour = slider.leftColour || 'white';
+            const rightColour = slider.rightColour || 'white';
+
+            // Apply background gradient to the slider
+            inputElem.style.background = `linear-gradient(to right, ${leftColour} 50%, ${rightColour} 50%)`;
+
+            // Update gradient dynamically as slider moves
+            inputElem.addEventListener('input', (e) => {
+                e.target.style.background = `linear-gradient(to right, ${leftColour} 50%, ${rightColour} 50%)`;
+            });
+
+            console.log(clone.querySelector('.slider_input'));
+
+            // Append to container
+            container.appendChild(clone);
+        });
+    }
 
     function populate_related_articles(articles) {
         const section = document.getElementById("related-articles");
@@ -70,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
+/*
 function create_slider(slider) {
   const template = document.getElementById("slider_template");
   
@@ -112,4 +172,4 @@ example_data.forEach(example => {
   const clone = create_slider(example)
   console.log(clone);
   sideBar.appendChild(clone);
-});
+});*/
