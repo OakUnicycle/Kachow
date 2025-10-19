@@ -1,13 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-    const toggleSwitch = document.getElementById('toggleSwitch');
-    const body = document.body;
-
-    toggleSwitch.addEventListener('click', () => {
-        body.classList.toggle('night');
-    });
-
-    const slider_template = document.getElementById("slider_template");
     
 
     const intro_container = document.getElementById("intro-container");
