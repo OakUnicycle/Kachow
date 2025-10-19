@@ -78,15 +78,6 @@ body {
 
 
 
-.toggle-knob {
-  transition: left 0.3s;
-}
-
-body.night .toggle-knob {
-  left: 33px;
-}
-
-
 
 
 
@@ -143,10 +134,12 @@ body.night .toggle-knob {
     display: flex;
     width: 100%;
     justify-content: center;
+    
 }
 
 .form_input input[type="text"] {
     width: 90%;
+    background-color: var(--background_colour);
 }
 
 
@@ -159,6 +152,8 @@ body.night .toggle-knob {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
+    color: var(--text_colour);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 .judging_text_box {
     font-size: 20px;
