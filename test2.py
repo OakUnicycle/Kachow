@@ -1,13 +1,23 @@
-from newsplease import NewsPlease
-import openai_integration as ai
+from article_analysis import analyse_article
 import json
 
+print(analyse_article('https://www.bbc.co.uk/news/articles/cn97gjqgq9po'))
 
-article = NewsPlease.from_url('https://www.bbc.co.uk/news/articles/c93dqew8l3xo')
-print("TITLE:")
-print(article.title)
+"""
+title: ...
+mainterxt:...
+summary:...
+related_articles: [
+    {
+    title:..
+    snippet:...
+    url:...
+    },
+    ...
+ 
 
+]
 
-print("\n\n\n")
-print("Finding Related articles\n\n")
-print(json.dumps(ai.get_related_articles_and_summary(article.maintext), indent = 4))
+data['related_articles'][0]['title']
+
+"""

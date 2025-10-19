@@ -6,7 +6,7 @@ import json
 def analyse_article(url):
     data = {}
 
-    article = NewsPlease.from_url('https://www.bbc.co.uk/news/articles/c93dqew8l3xo')
+    article = NewsPlease.from_url(url)
 
     data['title'] = article.title
     data['maintext'] = article.maintext
