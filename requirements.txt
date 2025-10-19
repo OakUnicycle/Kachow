@@ -6,3 +6,4 @@ news-please
 joblib
 nltk
 gensim
+validators
