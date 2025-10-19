@@ -7,9 +7,29 @@
 
     <title>Kachow</title>
     <link rel="stylesheet" href="../static/app.css" />
+    
 </head>
 
 <body>
+    <template id="slider_template">
+    <div class="judging_box bias">
+        <div class="judging_text_box">
+            <p class="slider_title">slider title</p>
+        </div>
+        <div class="slider_wrapper">
+            <input type="range" class="slider_input" min="0" max="100" value="0" disabled>
+                <div class="slider_labels">
+                    <span class="slider_min">min</span>
+                    <span class="slider_max">max</span>
+                </div>
+            </div>
+        </div>
+    <div class="divider"></div>
+    </template>
+
+    <script src="../static/app.js"></script>
+
+
     <div class="header">
         <div class="header_left">
             <h1 class="header_title">  
@@ -40,41 +60,13 @@
                 <div class= "judging_box source">
                     <img src="" alt="Source Icon">
                     <div class="judging_text_box source_text_box">
-                        <p>Source Text</p>
+                        <p>{{source}}</p>
                     </div>
                 </div>
 
                 <div class="divider"></div>
 
-                <div class="judging_box bias">
-                    <div class="judging_text_box">
-                        <p>Likelihood of Bias</p>
-                    </div>
-                    <div class="slider_wrapper">
-                        <input type="range" min="0" max="100" value={{bias_value}} id="slider" disabled>
-                        <div class="slider_labels">
-                            <span>0%</span>
-                            <span>100%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="divider"></div>
-
-                <div class="judging_box political">
-                    <div class="judging_text_box">
-                        <p>Politically Leaning</p>
-                    </div>
-                    <div class="slider_wrapper political">
-                        <input type="range" min="0" max="100" value={{political_value}} id="slider" disabled>
-                        <div class="slider_labels">
-                            <span>Left</span>
-                            <span>Right</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="divider"></div>
+                
 
             </div>
         </div>

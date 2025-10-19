@@ -179,6 +179,7 @@ body {
 }
 
 
+
 .slider_wrapper input[type="range"] {
     width: 100%;
 }
@@ -197,11 +198,7 @@ body {
     background: rgb(255, 255, 255);
 }
 
-.slider_labels {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-}
+
 
 
 
