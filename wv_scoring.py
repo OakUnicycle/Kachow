@@ -99,8 +99,8 @@ def main(url, model, extra_arguments=None):
     all_scores = instance.get_bias_scores(extra_args_dict)
     return all_scores
 
-if __name__ == "__main__":
+def getting_scores(url, arguments=None):
     filename = './word_rating_predictor.joblib'
     wv_model = joblib.load(filename)
-    score = main('https://www.bbc.co.uk/news/articles/cdegkd00yz3o', wv_model)
-    
+    score = main(url, wv_model, arguments)
+    return score 

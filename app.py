@@ -2,11 +2,10 @@
 from flask import Flask, render_template, request
 import sqlite3
 import validators
-from bias_checker import bias_checker
 from article_analysis import analyse_article
 import json
 from database import get_sentiment_for_url, add_sentiment_for_url
-
+from wv_scoring import getting_scores
 app = Flask(__name__)
 
 @app.route('/', methods=['POST','GET'])
@@ -17,9 +16,8 @@ def index():
     
     if get_sentiment_for_url(url) == None: # if not in database -> find info
         data = analyse_article(url)
-        results = bias_checker(url)
-
-        add_sentiment_for_url(url, results[0], results[1], results[2], data)
+        scores = getting_scores(url)
+        add_sentiment_for_url(url, scores, data)
     else:
         data = get_sentiment_for_url(url)['data']
     data['authors'] = 'tolkien'

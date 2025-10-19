@@ -17,3 +17,4 @@ website_sentiment.db  # <--- IMPORTANT: This is the database file.
 *.log
 
 test2.py
+word_rating_predictor.joblib
