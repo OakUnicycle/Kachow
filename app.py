@@ -20,7 +20,6 @@ def index():
         add_sentiment_for_url(url, scores, data)
     else:
         data = get_sentiment_for_url(url)['data']
-    data['authors'] = 'tolkien'
     
     return render_template('index.html', title = data['title'], author = data['authors'], main_text = data['maintext'], results = data['related_articles'])
 

@@ -58,9 +58,9 @@ class Bias_Score():
             pass
         
         if valid_comparisons > 0:
-            return total_similarity / valid_comparisons
+            return str(total_similarity / valid_comparisons)
         else:
-            return 0.0
+            return str(0.0)
   
   def get_bias_scores(self, dictionary=None):
     try:
@@ -81,8 +81,8 @@ class Bias_Score():
       scores['positive_sentiment'] = self.calculate_targeted_bias(article_words, self.POSITIVE_SEEDS)
       scores['negative_sentiment'] = self.calculate_targeted_bias(article_words, self.NEGATIVE_SEEDS)
             
-      scores['political_bias_score'] = scores['liberal_affinity'] - scores['conservative_affinity']
-      scores['sentiment_score'] = scores['positive_sentiment'] - scores['negative_sentiment']
+      scores['political_bias_score'] = str(float(scores['liberal_affinity']) - float(scores['conservative_affinity']))
+      scores['sentiment_score'] = str(float(scores['positive_sentiment']) - float(scores['negative_sentiment']))
       if dictionary is not None:
         scores.update(extra_scores) 
       return scores

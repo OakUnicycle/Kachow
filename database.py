@@ -9,20 +9,18 @@ def create_db():
         CREATE TABLE IF NOT EXISTS sentiment_results
         (id INTEGER PRIMARY KEY AUTOINCREMENT, 
          url TEXT NOT NULL UNIQUE,
-         bias REAL NOT NULL,
-         political_leaning REAL NOT NULL,
-         attitude REAL NOT NULL,
+         scores TEXT NOT NULL,
          data TEXT NOT NULL)
     ''') # for data have to json load and json dump
     conn.commit()
     conn.close()
 
 
-def add_sentiment_for_url(url, bias, political_leaning, attitude, data):
+def add_sentiment_for_url(url, scores, data):
     conn = sqlite3.connect('website_sentiment.db')
     c = conn.cursor()
     try:
-        c.execute("INSERT INTO sentiment_results (url, bias, political_leaning, attitude, data) VALUES (?, ?, ?, ?, ?)", (url, bias, political_leaning, attitude, json.dumps(data)))
+        c.execute("INSERT INTO sentiment_results (url, scores, data) VALUES (?, ?, ?)", (url, json.dumps(scores), json.dumps(data)))
         conn.commit()
     except sqlite3.IntegrityError:
         # URL already exists
@@ -40,7 +38,7 @@ def get_sentiment_for_url(url):
 
     # 1. SELECT the 'data' column along with the others
     c.execute("""
-        SELECT bias, political_leaning, attitude, data 
+        SELECT scores, data 
         FROM sentiment_results 
         WHERE url = ?
     """, (url,))
@@ -50,20 +48,20 @@ def get_sentiment_for_url(url):
 
     if result:
         # result is a tuple: (bias, political_leaning, attitude, json_string_data)
-        bias, political_leaning, attitude, json_string_data = result
+        json_string_scores, json_string_data = result
         
         # 2. Deserialize the JSON string back into a Python list/dict
         try:
             data_list = json.loads(json_string_data)
+            scores_list = json.loads(json_string_data)
         except json.JSONDecodeError:
             print(f"Error decoding JSON data for URL: {url}")
             data_list = None # Handle potential decoding errors gracefully
+            scores_list = None
         
         # 3. Return all values, with the deserialized data
         return {
-            'bias': bias,
-            'political_leaning': political_leaning,
-            'attitude': attitude,
+            'scores': scores_list,
             'data': data_list  # This is now a Python list of dictionaries
         }
 if __name__ == '__main__':
