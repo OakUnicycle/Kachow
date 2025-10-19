@@ -53,7 +53,7 @@ def get_sentiment_for_url(url):
         # 2. Deserialize the JSON string back into a Python list/dict
         try:
             data_list = json.loads(json_string_data)
-            scores_list = json.loads(json_string_data)
+            scores_list = json.loads(json_string_scores)
         except json.JSONDecodeError:
             print(f"Error decoding JSON data for URL: {url}")
             data_list = None # Handle potential decoding errors gracefully

@@ -7,7 +7,11 @@
 
     <title>Kachow</title>
     <link rel="stylesheet" href="../static/app.css" />
-    
+    <script>
+        var scores = {{ scores|tojson }};
+        var related_articles = {{ related_articles|tojson }};
+        var on = on
+    </script>
 </head>
 
 <body>
@@ -15,6 +19,7 @@
         <div class="judging_box bias">
             <div class="judging_text_box">
                 <p class="slider_title">slider title</p>
+                <span class="slider_value"></span>
             </div>
             <div class="slider_wrapper">
                 <input type="range" class="slider_input" min="0" max="100" value="0" disabled>
@@ -46,7 +51,7 @@
         <p class="intro-subtitle">Enter the url to scan for any biases and look for reliable sources.</p>
         <form id="intro-form" class="intro-form">
             <input type="text" id="intro-url" name="url" placeholder="https://www.example.com" required>
-            <button type="submit">Analyze</button>
+            <button type="submit">Analyse</button>
         </form>
     </div>
 
@@ -99,7 +104,7 @@
                 </h3>
 
                 <h4 class="article text_box author">
-                    {{author}}
+                    {{source}}
                 </h4>
 
                 <p class="article text_box contents">

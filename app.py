@@ -12,16 +12,20 @@ app = Flask(__name__)
 def index():
     url = request.form.get('url')
     if validators.url(url) != True: # checks if text is a url
-        return render_template('index.html', url = 'Not a  url')
-    
-    if get_sentiment_for_url(url) == None: # if not in database -> find info
+        return render_template('index.html', url = 'Not a  url', scores={}, related_articles=[])
+    else:
+        on=True
+
+    db_result = get_sentiment_for_url(url)
+    if db_result == None: # if not in database -> find info
         data = analyse_article(url)
         scores = getting_scores(url)
         add_sentiment_for_url(url, scores, data)
     else:
-        data = get_sentiment_for_url(url)['data']
+        data = db_result['data']
+        scores = db_result['scores']
     
-    return render_template('index.html', title = data['title'], author = data['authors'], main_text = data['maintext'], results = data['related_articles'])
+    return render_template('index.html', title = data['title'], source = data['source_domain'], main_text = data['summary'], related_articles = data['related_articles'], scores=scores, on=on)
 
 if __name__ == '__main__':
     app.run(debug=True)
