@@ -6,8 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Kachow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/app.css" />
-    
+    <script>
+        var scores = {{ scores|tojson }};
+        var related_articles = {{ related_articles|tojson }};
+    </script>
 </head>
 
 <body>
@@ -15,6 +21,7 @@
         <div class="judging_box bias">
             <div class="judging_text_box">
                 <p class="slider_title">slider title</p>
+                <span class="slider_value"></span>
             </div>
             <div class="slider_wrapper">
                 <input type="range" class="slider_input" min="0" max="100" value="0" disabled>
@@ -41,17 +48,17 @@
         </div>
     </div>
 
-    <div class="intro-container" id="intro-container">
+    <div class="intro-container {% if not is_initial_load %}inactive{% endif %}" id="intro-container">
         <h1 class="intro-title">Analyse news articles</h1>
         <p class="intro-subtitle">Enter the url to scan for any biases and look for reliable sources.</p>
-        <form id="intro-form" class="intro-form">
+        <form id="intro-form" class="intro-form" method="POST">
             <input type="text" id="intro-url" name="url" placeholder="https://www.example.com" required>
-            <button type="submit">Analyze</button>
+            <button type="submit">Analyse</button>
         </form>
     </div>
 
 
-    <div class="split_screen" id="split_screen" style="display: none; opacity: 0;">
+    <div class="split_screen {% if is_initial_load %}inactive{% endif %}" id="split_screen">
         <div class="left_side">
             <div class="side_bar">
                 
@@ -59,30 +66,11 @@
                     <h2 class="url_text">
                         Input a URL of an Article
                     </h2>
-                    <form action="upload" method="post" id="main_form" class="form_input">
+                    <form method="post" id="main_form" class="form_input">
                         <input type="text" id="url" name="url" placeholder="enter website URL"><br>
                     </form>
                 </div>
 
-                <div class="divider"></div>
-
-                <div class= "judging_box source">
-                    <img src="" alt="Source Icon">
-                    <div class="judging_text_box source_text_box">
-                        <p>{{source}}</p>
-                    </div>
-                </div>
-
-                <div class="divider"></div>
-
-                <div class="input_box">
-                    <h2 class="url_text">
-                        Add an extra slider
-                    </h2>
-                    <form action="upload" method="post" id="slider_form" class="form_input">
-                        <input type="text" id="url" name="url" placeholder="Add new slider"><br>
-                    </form>
-                </div>
 
                 <div class="divider"></div>
                 
@@ -94,15 +82,15 @@
             
             <article class="output_box">
 
-                <h3 class="article text_box title">
+                <h3 class="article title">
                     {{title}}
                 </h3>
 
-                <h4 class="article text_box author">
-                    {{author}}
+                <h4 class="article author">
+                    {{source}}
                 </h4>
 
-                <p class="article text_box contents">
+                <p class="article contents">
                     {{main_text}}
                 </p>
             </article>

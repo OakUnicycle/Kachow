@@ -11,17 +11,19 @@ app = Flask(__name__)
 @app.route('/', methods=['POST','GET'])
 def index():
     url = request.form.get('url')
-    if validators.url(url) != True: # checks if text is a url
-        return render_template('index.html', url = 'Not a  url')
-    
-    if get_sentiment_for_url(url) == None: # if not in database -> find info
+    if not url or validators.url(url) != True:
+        return render_template('index.html', scores={}, related_articles=[], is_initial_load=True)
+
+    db_result = get_sentiment_for_url(url)
+    if db_result == None: # if not in database -> find info
         data = analyse_article(url)
         scores = getting_scores(url)
         add_sentiment_for_url(url, scores, data)
     else:
-        data = get_sentiment_for_url(url)['data']
+        data = db_result['data']
+        scores = db_result['scores']
     
-    return render_template('index.html', title = data['title'], author = data['authors'], main_text = data['maintext'], results = data['related_articles'])
+    return render_template('index.html', title = data['title'], source = data['source_domain'], main_text = data['summary'], related_articles = data['related_articles'], scores=scores, is_initial_load=False)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,36 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
 
-    const intro_container = document.getElementById("intro-container");
-    const intro_form = document.getElementById("intro-form");
-    const intro_url = document.getElementById("intro-url");
-    const split_screen = document.getElementById("split_screen");
-    const main_form = document.getElementById("main_form");
-
-    intro_form.addEventListener("submit", (e) => {
-
-        e.preventDefault();
-        const url = intro_url.value;
-
-        //intro_container.style.display = "none";
-        //split_screen.style.display = "flex";
-        intro_container.style.opacity = '0';
-        // Disable mouse clicks on the intro screen while it's fading
-        intro_container.style.pointerEvents = 'none';
-
-        split_screen.style.display = "flex";
-
-        setTimeout(() => {
-            intro_container.style.display = "none";
-            split_screen.style.opacity = "1";
-        }, 500);
+    // Check if we have scores data. If we do, it means the page has been loaded
+    // with data from the backend, so we should populate the sliders and cards.
+    if (scores && Object.keys(scores).length > 0) {
+        const politicalBias = (parseFloat(scores.political_bias_score) + 1) * 50;
+        const sentiment = (parseFloat(scores.sentiment_score) + 1) * 50;
+        const summedAffinities = Math.abs(parseFloat(scores.liberal_affinity)) + Math.abs(parseFloat(scores.conservative_affinity));
+        const normalizedBias = summedAffinities / 2;
+        const likelihoodOfBias = normalizedBias * 100;
 
         populate_sliders([
             {
                 title: "Political Sway",
                 min: "left",
                 max: "right",
-                value: 50,
+                value: politicalBias,
                 leftColour: 'red',
                 rightColour: 'blue'
             },
@@ -38,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: "Sentiment",
                 min: "negative",
                 max: "positive",
-                value: 50,
+                value: sentiment,
                 leftColour: 'red',
                 rightColour: 'green'
             },
@@ -46,81 +30,55 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: "Likelihood of Bias",
                 min: "0%",
                 max: "100%",
-                value: 50,
+                value: likelihoodOfBias,
             }
         ]);
 
-        populate_related_articles([
-            {
-                title: "New AI Model Challenges Industry Giants",
-                snippet: "A small startup has released a new language model that performs surprisingly well against competitors...",
-                link: "#"
-            },
-            {
-                title: "The Ethics of Artificial Intelligence in Media",
-                snippet: "Experts debate the implications of AI-generated content and its potential impact on public discourse.",
-                link: "#"
-            },
-            {
-                title: "How Public Policy is Scrambling to Catch Up to Tech",
-                snippet: "Governments around the world are facing new challenges as technology outpaces regulation.",
-                link: "#"
-            }
-        ]);
-
-
-        //main_form.submit();
-    })
-
+        populate_related_articles(related_articles);
+    }
 
     function populate_sliders(sliders) {
         const container = document.querySelector('.side_bar');
         const template = document.getElementById('slider_template');
 
         sliders.forEach(slider => {
-            // Clone the template
             const clone = template.content.cloneNode(true);
 
-            // Populate title
-            const titleElem = clone.querySelector('.slider_title');
-            titleElem.textContent = slider.title;
+            clone.querySelector('.slider_title').textContent = slider.title;
+            const valueElem = clone.querySelector('.slider_value');
+            valueElem.textContent = Math.round(slider.value);
 
-            // Populate input
             const inputElem = clone.querySelector('.slider_input');
-            
             inputElem.value = slider.value;
-            inputElem.disabled = false;
+            inputElem.disabled = true; // Enable the slider
 
-            // Populate min/max labels
             clone.querySelector('.slider_min').textContent = slider.min;
             clone.querySelector('.slider_max').textContent = slider.max;
 
-            // Determine colors (default to white)
             const leftColour = slider.leftColour || 'white';
             const rightColour = slider.rightColour || 'white';
 
-            // Apply background gradient to the slider
-            inputElem.style.background = `linear-gradient(to right, ${leftColour} 50%, ${rightColour} 50%)`;
+            inputElem.style.background = `linear-gradient(to right, ${leftColour} ${inputElem.value}%, ${rightColour} ${inputElem.value}%)`;
 
-            // Update gradient dynamically as slider moves
             inputElem.addEventListener('input', (e) => {
-                e.target.style.background = `linear-gradient(to right, ${leftColour} 50%, ${rightColour} 50%)`;
+                valueElem.textContent = Math.round(e.target.value);
+                e.target.style.background = `linear-gradient(to right, ${leftColour} ${e.target.value}%, ${rightColour} ${e.target.value}%)`;
             });
 
-            console.log(clone.querySelector('.slider_input'));
-
-            // Append to container
             container.appendChild(clone);
         });
     }
 
     function populate_related_articles(articles) {
         const section = document.getElementById("related-articles");
+        section.innerHTML = ''; // Clear existing cards
 
-        for (article of articles) {
+        for (const article of articles) {
             const element = document.createElement('a');
             element.className = "article-card";
-            element.href = article.url;
+            element.href = article.link;
+            element.target = "_blank"; // Open in new tab
+            element.rel = "noopener noreferrer";
             element.innerHTML = `
                 <div class="card-content">
                     <h1>${article.title}</h1>
@@ -130,7 +88,4 @@ document.addEventListener("DOMContentLoaded", () => {
             section.append(element);
         }
     }
-})
-
-
-
+});
