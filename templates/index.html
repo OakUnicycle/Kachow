@@ -13,6 +13,8 @@
     <script>
         var scores = {{ scores|tojson }};
         var related_articles = {{ related_articles|tojson }};
+
+        const comparison_word = "{{ comparison_word | safe }}";
     </script>
 </head>
 
@@ -53,6 +55,8 @@
         <p class="intro-subtitle">Enter the url to scan for any biases and look for reliable sources.</p>
         <form id="intro-form" class="intro-form" method="POST">
             <input type="text" id="intro-url" name="url" placeholder="https://www.example.com" required>
+            <label for="comparison_word">Compare with Word:</label>
+            <input type="text" name="comparison_word" placeholder="e.g., happy, economy, war" value="{{ comparison_word if comparison_word else '' }}">
             <button type="submit">Analyse</button>
         </form>
     </div>
@@ -70,11 +74,15 @@
                         <input type="text" id="url" name="url" placeholder="enter website URL"><br>
                     </form>
                 </div>
+                
 
 
                 <div class="divider"></div>
                 
-
+                <div id="word_comparison_card" style="display: none; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <h3 id="comparison_word_title"></h3>
+                    <p id="comparison_word_score"></p>
+                </div>
             </div>
         </div>
 

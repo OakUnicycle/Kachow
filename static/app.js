@@ -34,6 +34,31 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         ]);
 
+        if (typeof comparison_word !== 'undefined' && comparison_word) {
+            const comparisonScoreKey = comparison_word.toLowerCase();
+            const rawScore = scores[comparisonScoreKey];
+            
+            if (rawScore) {
+                const floatScore = parseFloat(rawScore);
+                const scorePercentage = ((floatScore + 1.0) / 2.0) * 100;
+                
+                // Scale the score to be a percentage for display
+                const displayScore = `${Math.round(scorePercentage)}%`;
+                
+                // Display the card
+                const card = document.getElementById("word_comparison_card");
+                card.style.display = 'block';
+                document.getElementById("comparison_word_title").textContent = `Affinity with "${comparison_word}"`;
+                
+                // The score is an average cosine similarity: -1.0 to 1.0.
+                // Displaying it as a raw affinity or a simple percentage works best.
+                document.getElementById("comparison_word_score").innerHTML = `
+                    **Raw Affinity:** ${floatScore.toFixed(3)} <br> 
+                    **Similarity (%):** ${displayScore}
+                `;
+            }
+        }
+
         populate_related_articles(related_articles);
     }
 
